@@ -7,7 +7,7 @@ const readdir = promisify(fs.readdir)
 const renameFolder = promisify(fs.rename)
 const stat = promisify(fs.stat);
 
-module.exports = async function(targetPath, batchSize, fileExt){
+module.exports = async function(targetPath, batchSize, fileExt, exclude){
   //fileExt is used to filtering files to batch
 
 
@@ -21,10 +21,17 @@ module.exports = async function(targetPath, batchSize, fileExt){
       fileExt = '.' + fileExt
     }
 
-    var targetFiles = items.filter(item => item.includes(fileExt))
+    var targetFiles = items.filter(item => item.toUpperCase().includes(fileExt.toUpperCase()))
+
+    //remove if required
+    if(exclude && Array.isArray(exclude)){
+      targetFiles = targetFiles.filter(file => {
+        return !exclude.some(ex => file.toUpperCase() == `${ex.toUpperCase()}${fileExt.toUpperCase()}` )
+      })
+    }
 
     //first move all the files
-    var batches = Math.ceil(targetFiles.length/batchSize);
+    var batches = Math.ceil(targetFiles.length/batchSize); //the number of batches
     for (var i = 0; i < batches; i++) {
       var firstFileInd = i * batchSize;
       var lastFileInd = firstFileInd + batchSize

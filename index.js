@@ -1,6 +1,9 @@
 const batchFiles = require('./functions/batchFiles')
 
+//path 
 //var path = 'C:/testdata/Scrophulariaceae'
-var path = 'F:/Herbarium Specimen Images/SANBI Compton/Scrophulariaceae2Batched'
+var path = 'H:\\Selmar Schonland Herbarium\\Proteaceae'
 
-batchFiles(path, 50, 'jpg')
+//exclude
+
+batchFiles(path, 60, 'jpg')
