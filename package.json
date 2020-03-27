@@ -9,6 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "move-file": "^1.0.0"
+    "cp-file": "^7.0.0",
+    "fs-extra": "^8.1.0",
+    "move-file": "^1.0.0",
+    "node-dir": "^0.1.17"
   }
 }

@@ -15,7 +15,7 @@ module.exports = async function(targetPath, batchSize, fileExt, exclude){
 
   //get the list of files
   readdir(targetPath).then(items => {
-    var moveFilePromiseArray = [];
+    var moveFilePromiseArray = []
 
     if(fileExt[0] != '.') {
       fileExt = '.' + fileExt
