@@ -24,7 +24,7 @@ module.exports = async function(targetPath, batchSize, fileExt, exclude){
     var targetFiles = items.filter(item => item.toUpperCase().includes(fileExt.toUpperCase()))
 
     //remove if required
-    if(exclude && Array.isArray(exclude)){
+    if(exclude && Array.isArray(exclude) && exclude.length > 0){
       targetFiles = targetFiles.filter(file => {
         return !exclude.some(ex => file.toUpperCase() == `${ex.toUpperCase()}${fileExt.toUpperCase()}` )
       })
