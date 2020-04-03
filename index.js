@@ -1,12 +1,11 @@
 const batchFiles = require('./functions/batchFiles')
 
-//path 
-//var path = 'C:/testdata/Scrophulariaceae'
-var path = 'H:\\Herbarium Specimen Images\\SANBI Compton\\Theophrastaceae\\JPEG'
+//var targetDir = 'C:/testdata/Scrophulariaceae'
+var targetDir = String.raw`H:\Herbarium Specimen Images\Wits Moss\test`
 
 //exclude
 let exclude = require('./exclude') //VNB
 
+let targetFileTypes = ['.jpg', '.jpeg'] //an array of target file types for data capture, may be more than one
 
-//VNB make sure to update exclude if some images already captured!!
-batchFiles(path, 60, 'jpg', exclude)
+batchFiles(targetDir, 3, targetFileTypes, exclude)
