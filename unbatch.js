@@ -1,6 +1,8 @@
-const unbatch = require('./functions/unbatchToNewLocation')
+const unbatch = require('./functions/unbatchToNewLocation.j')
 
 let sourcePath = 'H:\\Herbarium Specimen Images\\UKZN Bews'
 let targetPath = 'F:\\Images\\Herbaria\\Bews'
 
-unbatch(sourcePath, targetPath)
+let moveOrCopy = 'move' //VNB always check this
+
+unbatch(sourcePath, targetPath, moveOrCopy)

@@ -1,7 +1,8 @@
 //read all files in subfolders and copy to a new folder, such as on another hard drive
-//for unbatching images in subfolders within a family folder
+//for unbatching images in subfolders
 
 const copyFile = require('cp-file')
+const moveFile = require('move-file');
 const fs = require('fs-extra') //for reading contents on a dir only (not recursive)
 const dir = require('node-dir') //for recursively reading directories
 const path = require('path')
@@ -25,8 +26,14 @@ function showProgress(sourcePath, targetPath) {
 /**
  * sourcePath is a directory containing all the folders with family names
  * targetPath is the directory to move everything to
+ * moveOrCopy is whether to move or copy the files - default is copy
  */
-module.exports = async function(sourcePath, targetPath){
+module.exports = async function(sourcePath, targetPath, moveOrCopy){
+
+  let transferFunc = copyFile
+  if (moveOrCopy && moveOrCopy.toLowerCase().trim() == 'move'){
+    transferFunc = moveFile
+  }
 
   //get the target path subfolders
   let subfolders = await fs.readdir(sourcePath)
@@ -45,7 +52,7 @@ module.exports = async function(sourcePath, targetPath){
       let family = subfolders.find(familyName => fileToMove.toLowerCase().includes(familyName.toLowerCase()))
       let fileNameOnly = path.basename(fileToMove)
       let newFilePath = path.resolve(targetPath, family, fileNameOnly)
-      moveFilePromiseArray.push(copyFile(fileToMove, newFilePath))
+      moveFilePromiseArray.push(transferFunc(fileToMove, newFilePath))
     })
 
     Promise.all(moveFilePromiseArray).then(_ => {

@@ -8,4 +8,4 @@ let exclude = require('./exclude') //VNB
 
 let targetFileTypes = ['.jpg', '.jpeg'] //an array of target file types for data capture, may be more than one
 
-batchFiles(targetDir, 3, targetFileTypes, exclude)
+batchFiles(targetDir, 60, targetFileTypes, exclude)
